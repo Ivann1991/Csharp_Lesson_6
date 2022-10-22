@@ -5,14 +5,43 @@ Console.Clear();
 
 int CountElement = EnterUserNum("Какое количество чисел желаешь ввести? ", "ошибка ввода");
 
-int[] UserArray = EnterArrayElement(CountElement);
+if (CountElement > 10)
+{
+    Console.WriteLine($"Ты уверен что хочешь вручную вбивать {CountElement} чисел? Напиши yes/no");
+    string answer = Console.ReadLine() ?? "";
 
-int Number = CountNum (UserArray);
-Console.Write("Ты ввел числа: ");
-Console.Write(String.Join(", ", UserArray));
+    if (answer.ToLower() == "yes")
 
-Console.Write($", из них {Number} больше нуля");
+    {
+        Console.WriteLine("Я смотрю у тебя весьма много времени =)");
+        int[] UserArray1 = EnterArrayElement(CountElement);
+        int Number1 = CountNum(UserArray1);
+        Console.Write("Ты ввел числа: ");
+        Console.Write(String.Join(", ", UserArray1));
 
+        Console.Write($", из них {Number1} больше нуля");
+    }
+    if (answer.ToLower() == "no")
+    {
+        int CountElement1 = EnterUserNum("Передумал?! и сколько же чисел? ", "ошибка ввода");
+        int[] UserArray1 = EnterArrayElement(CountElement1);
+
+        int Number1 = CountNum(UserArray1);
+        Console.Write("Ты ввел числа: ");
+        Console.Write(String.Join(", ", UserArray1));
+
+        Console.Write($", из них {Number1} больше нуля");
+    }
+}
+else
+{
+    int[] UserArray = EnterArrayElement(CountElement);
+    int Number = CountNum(UserArray);
+    Console.Write("Ты ввел числа: ");
+    Console.Write(String.Join(", ", UserArray));
+
+    Console.Write($", из них {Number} больше нуля");
+}
 
 /////////////////////////// методы
 int EnterUserNum(string message, string errorMessage)        // количество элементов массива, ввод с клавиатуры
@@ -58,5 +87,5 @@ int CountNum(int[] array)                                    // Определе
     for (int i = 0; i < array.Length; i++)
         if (array[i] > 0)
             Count++;
-    return Count;        
+    return Count;
 }
